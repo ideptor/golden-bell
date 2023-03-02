@@ -5,7 +5,7 @@ from .views import main_views
 
 import config
 
-app=Flask(__name__)
+app = Flask(__name__)
 app.register_blueprint(main_views.bp)
 
 # db = SQLAlchemy()
