@@ -1,8 +1,15 @@
-from flask import Blueprint
+from werkzeug.utils import redirect
+
+from flask import Blueprint, url_for
 
 bp = Blueprint("main", __name__, url_prefix="/")
 
 
-@bp.route("/")
+@bp.route("/hello")
 def hello_pybo():
-    return "hello pybo2"
+    return "Hello, Pybo!"
+
+
+@bp.route("/")
+def index():
+    return redirect(url_for("question._list"))
