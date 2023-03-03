@@ -1,5 +1,12 @@
 # flask
 
+
+## docker init
+
+```
+docker run -dit -v D:_shared:/shared -p 8882:8882 --name python39 python:3.9
+```
+
 ## install
 
 ```
@@ -10,8 +17,16 @@ pip install -r requirements.txt
 
 ```
 flask db init
+flask db migrate
+flask db upgrade
 ```
 
+
+## run
+
+```
+./run.sh
+```
 
 
 
