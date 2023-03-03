@@ -13,10 +13,9 @@ bp = Blueprint("quiz", __name__, url_prefix="/quiz")
 
 
 def get_quiz_ids() -> list:
-    
     quiz_set = set()
     question_list = Question.query.order_by(Question.create_date.desc())
-    
+
     for question in question_list:
         quiz_set.add(question.id)
 

@@ -1,6 +1,6 @@
 from werkzeug.utils import redirect
 
-from flask import Blueprint, url_for
+from flask import Blueprint, url_for, g
 
 bp = Blueprint("main", __name__, url_prefix="/")
 
@@ -12,4 +12,4 @@ def hello_pybo():
 
 @bp.route("/")
 def index():
-    return redirect(url_for("quiz.show", question_id=1))
+    return redirect(url_for("quiz.show", quiz_idx=0))

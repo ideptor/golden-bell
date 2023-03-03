@@ -28,6 +28,10 @@
             <div class="card-text" style="white-space: pre-line;"><h2 style="color:rgb(255, 0, 0);">{{ answer.content }}</h2></div>
         </div>
     </div>
+    <div class="my-3">
+        <a href="{{ url_for('quiz.show', quiz_idx=(quiz_idx+1)) }}"
+           class="btn btn-sm btn-outline-secondary">다음문제</a>
+    </div>
     {% endfor %}
 </div>
 {% endblock %}
