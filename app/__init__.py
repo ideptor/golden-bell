@@ -17,7 +17,6 @@ migrate = Migrate()
 
 
 def create_app():
-
     app = Flask(__name__)
     app.config.from_object(config)
 
@@ -31,12 +30,14 @@ def create_app():
         migrate.init_app(app, db)
 
     from . import models
+
     # 블루프린트
-    from .views import answer_views, auth_views, main_views, question_views
+    from .views import answer_views, auth_views, main_views, question_views, quiz_views
 
     app.register_blueprint(main_views.bp)
     app.register_blueprint(question_views.bp)
     app.register_blueprint(answer_views.bp)
     app.register_blueprint(auth_views.bp)
+    app.register_blueprint(quiz_views.bp)
 
     return app

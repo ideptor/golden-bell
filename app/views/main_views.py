@@ -12,4 +12,4 @@ def hello_pybo():
 
 @bp.route("/")
 def index():
-    return redirect(url_for("question._list"))
+    return redirect(url_for("quiz.show", question_id=1))
