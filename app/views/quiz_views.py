@@ -13,11 +13,11 @@ bp = Blueprint("quiz", __name__, url_prefix="/quiz")
 
 # questions = list(Question.query.order_by(Question.create_date.desc()))
 # shuffle(questions)
-quiz_idx = 0
+# quiz_idx = 0
 # print(quiz_num, question_list)
 
-@bp.route("/<int:question_id>/")
-def show(question_id: int = 1):
+@bp.route("/<int:quiz_idx>/")
+def show(quiz_idx: int = 0):
     # form = AnswerForm()
     # question = Question.query.get_or_404(question_id)
     # return question.content
@@ -31,6 +31,8 @@ def show(question_id: int = 1):
     quiz_ids = sorted(list(quiz_dict.keys()))
     print(f"quiz.show() quiz_ids: {quiz_ids}", file=sys.stdout)
 
+    if quiz_idx >= len(quiz_ids):
+        return "<h1>퀴즈가 종료되었습니다</h1>"
     
     return render_template(
         "quiz/quiz.html", 
