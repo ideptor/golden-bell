@@ -11,32 +11,45 @@ import sys
 
 bp = Blueprint("quiz", __name__, url_prefix="/quiz")
 
-# questions = list(Question.query.order_by(Question.create_date.desc()))
-# shuffle(questions)
-# quiz_idx = 0
-# print(quiz_num, question_list)
+
+def get_quiz_ids() -> list:
+    
+    quiz_set = set()
+    question_list = Question.query.order_by(Question.create_date.desc())
+    
+    for question in question_list:
+        quiz_set.add(question.id)
+
+    quiz_ids = sorted(list(quiz_set))
+    print(f"quiz.show() quiz_ids: {quiz_ids}", file=sys.stdout)
+
+    return quiz_ids, question_list
+
 
 @bp.route("/<int:quiz_idx>/")
 def show(quiz_idx: int = 0):
-    # form = AnswerForm()
-    # question = Question.query.get_or_404(question_id)
-    # return question.content
     print(f"quiz.show(): {quiz_idx}", file=sys.stdout)
 
-    quiz_dict = dict()
-    question_list = Question.query.order_by(Question.create_date.desc())
-    for question in question_list:
-        quiz_dict[question.id] = question
-
-    quiz_ids = sorted(list(quiz_dict.keys()))
-    print(f"quiz.show() quiz_ids: {quiz_ids}", file=sys.stdout)
+    quiz_ids, question_list = get_quiz_ids()
 
     if quiz_idx >= len(quiz_ids):
         return "<h1>퀴즈가 종료되었습니다</h1>"
-    
+
     return render_template(
-        "quiz/quiz.html", 
-        quiz_num=(quiz_idx+1), 
-        question=question_list.get(quiz_ids[quiz_idx])
+        "quiz/quiz.html",
+        quiz_idx=quiz_idx,
+        question=question_list.get(quiz_ids[quiz_idx]),
     )
 
+
+@bp.route("/answer/<int:quiz_idx>/")
+def answer(quiz_idx: int):
+    print(f"quiz.answr.show(): {quiz_idx}", file=sys.stdout)
+
+    quiz_ids, question_list = get_quiz_ids()
+
+    return render_template(
+        "quiz/quiz_answer.html",
+        quiz_idx=quiz_idx,
+        question=question_list.get(quiz_ids[quiz_idx]),
+    )
