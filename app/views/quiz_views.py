@@ -3,16 +3,23 @@ from random import shuffle
 from werkzeug.utils import redirect
 
 from app import db
-from app.forms import AnswerForm, QuestionForm
+from app.forms import EvaluationForm
 from app.models import Question
-from app.views.auth_views import login_required
-from flask import Blueprint, flash, g, render_template, request, url_for
+from flask import Blueprint, g, render_template, request, url_for
 import sys
+from collections import defaultdict
+from typing import Tuple
 
 bp = Blueprint("quiz", __name__, url_prefix="/quiz")
 
+scores = dict(
+    kpg=defaultdict(bool),
+    koy=defaultdict(bool),
+    kme=defaultdict(bool),
+)
 
-def get_quiz_ids() -> list:
+
+def get_quiz_ids() -> Tuple[list, list]:
     quiz_set = set()
     question_list = Question.query.order_by(Question.create_date.desc())
 
