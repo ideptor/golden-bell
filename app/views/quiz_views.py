@@ -1,11 +1,10 @@
 from datetime import datetime
-from random import shuffle
 from werkzeug.utils import redirect
 
 from app import db
 from app.forms import EvaluationForm
 from app.models import Question
-from flask import Blueprint, g, render_template, request, url_for
+from flask import Blueprint, render_template, url_for
 import sys
 from collections import defaultdict
 from typing import Tuple
