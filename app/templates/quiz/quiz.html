@@ -20,6 +20,8 @@
     <div class="my-3">
         <a href="{{ url_for('quiz.answer', quiz_idx=quiz_idx) }}"
            class="btn btn-sm btn-outline-secondary">정답보기</a>
+        <a href="{{ url_for('quiz.show', quiz_idx=(quiz_idx+1)) }}"
+           class="btn btn-sm btn-outline-secondary">다음문제</a>
     </div>
 </div>
 {% endblock %}
