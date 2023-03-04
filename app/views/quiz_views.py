@@ -31,6 +31,9 @@ def show(quiz_idx: int = 0):
 
     quiz_ids, question_list = get_quiz_ids()
 
+    if len(quiz_ids) <= 0:
+        return redirect(url_for("question._list"))
+
     if quiz_idx >= len(quiz_ids):
         return "<h1>퀴즈가 종료되었습니다</h1>"
 
