@@ -1,5 +1,15 @@
 # flask
 
+## pyenv install
+
+```
+curl https://pyenv.run | bash
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
+source ~/.bashrc
+```
 
 ## docker init
 
@@ -10,6 +20,7 @@ docker run -dit -v D:_shared:/shared -p 8882:8882 --name python39 python:3.9
 ## install
 
 ```
+pyenv local 3.9.1
 pip install -r requirements.txt
 ```
 
@@ -63,3 +74,5 @@ Question 모델의 create_date 속성은 DateTime 유형이므로 datetime.now �
 >>> db.session.add(q)
 >>> db.session.commit()
 ```
+
+  
